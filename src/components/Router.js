@@ -7,7 +7,7 @@ const Router = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={EmailComposer}/>
-            <Route  component={NotFound}/>
+            <Route component={NotFound}/>
         </Switch>
     </BrowserRouter>
 );
