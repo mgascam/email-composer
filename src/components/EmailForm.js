@@ -30,9 +30,6 @@ class EmailForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
     }
-    componentDidUpdate() {
-        // console.log(this.state);
-    }
     validateEmailList(commaSeparatedString){
         const emailRegex = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
         return commaSeparatedString.split(',').every(val => val.trim().match(emailRegex));
@@ -49,7 +46,7 @@ class EmailForm extends Component {
                 isValid = value.length > 0 ? isValidEmailList : true;
             break;
             case 'subject':
-                isValid = value.length > 0;
+                isValid = value.length > 0 && value.length <= 100;
             break;
             case 'message':
                 isValid = value.length > 0;
@@ -108,7 +105,7 @@ class EmailForm extends Component {
                             </div>
                             <div className="form-group">
                                 <input
-                                    className="form-control" 
+                                    className={`form-control ${!this.state.subjectValid ? 'is-invalid': ''}` } 
                                     name="subject" 
                                     type="text" 
                                     value={this.state.subject} 
@@ -117,7 +114,7 @@ class EmailForm extends Component {
                             </div>
                             <div className="form-group">
                                 <textarea
-                                    className="form-control"
+                                    className={`form-control ${!this.state.messageValid ? 'is-invalid': ''}` }
                                     name="message" 
                                     placeholder="Message" 
                                     value={this.state.message} 
