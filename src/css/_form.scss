@@ -1,36 +1,36 @@
 $baseWidth: 1920px;
+$baseHeight: 1080px;
 $white: #fff;
-
-// .form-wrapper {
-//     box-shadow: 0px 5px 20px 3px rgba(0,0,0,0.1);
-//     background: $white;
-//     width: 764px / $baseWidth * 100%;
-//     min-width: 764px;
-
-    
-//     .header {
-//         width: 100%;
-//         height: 86px;
-//         background-color: #094358;
-//         color: $white;
-//         font-family: 'Open Sans', sans-serif;
-//         padding: 40px 20px;
-//         border: 1px solid rgba(0,0,0,0.1);
-//         border-radius: 5px;
-//         z-index: 100;
-//         h1 {
-//             font-size: 16px;
-//             font-weight: normal;
-//         }
-//     }
-// }
+$blue: #094358;
+$grey: #d4d9dc;
 
 .form-wrapper {
     box-shadow: 0px 5px 20px 3px rgba(0,0,0,0.1);
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 200;
-    .card-header {
-        background-color:rgba(45, 0, 96, 0.9);
-        color: #fefefe;
+    width: 764px;
+    height: 642px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    .card {
+        height: 100%;
+        border-color: #17a2b8;
+        // border-color:  rgba(0,0,0,0.1;
+        border-radius: 10px;
+        .card-header {
+            background-color: $blue;
+            color: $grey;
+            height: 85px;
+            h1 {
+                margin: 20px 20px;
+                font-size: 18px;
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 100;
+            }
+        }
+        .card-body {
+            padding: 2.5rem;
+        }
     }
 }

@@ -2,8 +2,12 @@ import React from 'react';
 
 export default ({children}) => {
     return (
-        <div className="container">
-            {children}
+        <div className="wrapper">
+            <div className="container">
+                <div className="row">
+                    {children}
+                </div>
+            </div>
         </div>
     )   
 }

@@ -8,7 +8,7 @@ export default () => {
             <section className="form-wrapper">
                 <div className="card">
                     <div className="card-header">
-                        Send E-mail
+                        <h1>Send E-mail</h1>
                     </div>
                     <div className="card-body">
                         <EmailComposer />
