@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AttachmentList from './AttachmentList';
 
 class EmailForm extends Component {
     constructor(props) {
@@ -12,10 +13,13 @@ class EmailForm extends Component {
             bccValid: true,
             subject: "",
             message: "",
+            attachments: [],
             formValid: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
+        this.onRemoveAttachment = this.onRemoveAttachment.bind(this);
     }
     handleInputChange(event) {
         const target = event.target;
@@ -24,6 +28,15 @@ class EmailForm extends Component {
         this.setState({
             [name]: value
         }, () => { this.validateField(name, value)});
+    }
+    handleFileChange(event) {
+        const newAttachment = {
+            id: `attachment-${this.state.attachments.length + 1}`,
+            url: URL.createObjectURL(event.target.files[0])
+        };
+        this.setState({
+            attachments: [...this.state.attachments, newAttachment]
+        });
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -64,6 +77,12 @@ class EmailForm extends Component {
             && this.state.bccValid 
             && this.state.subjectValid 
             && this.state.messageValid;
+    }
+    onRemoveAttachment(event){
+        const attachments = this.state.attachments.filter(att => att.id !== event.target.id);
+        this.setState({
+            attachments
+        });
     }
     render() {
         return (
@@ -113,6 +132,10 @@ class EmailForm extends Component {
                         onChange={this.handleInputChange}>
                     </textarea>
                 </div>
+                <input type="file" onChange={this.handleFileChange} />
+                <AttachmentList 
+                    attachments={this.state.attachments} 
+                    removeAttachment={this.onRemoveAttachment}  />
                 <button
                     type="submit" className="btn btn-primary" 
                     disabled={!this.state.formValid}>Sign up</button>
