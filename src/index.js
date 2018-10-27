@@ -1,14 +1,24 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createBrowserHistory } from 'history';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import Root from "./components/Root";
-import EmailComposerApp from './reducers';
+import EmailComposerApp, { initialState } from './reducers';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/style.scss';
 
-const store = createStore(EmailComposerApp);
+const history = createBrowserHistory()
 
-render(<Root store={store} />,
+const store = createStore(
+    connectRouter(history)(EmailComposerApp),
+    initialState,
+    compose(
+        applyMiddleware(routerMiddleware(history))
+    )
+);
+
+render(<Root store={store} history={history}/>,
     document.getElementById('root')
 );

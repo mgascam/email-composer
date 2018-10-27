@@ -1,6 +1,6 @@
 import { SEND_EMAIL } from '../actions';
 
-const initialState = {
+export const initialState = {
     email: {
         to: '',
         cc: '',
@@ -11,7 +11,7 @@ const initialState = {
     }
 }
 
-function EmailComposerApp(state = initialState, action) {
+function EmailComposerApp(state, action) {
     switch(action.type) {
         case SEND_EMAIL:
             return Object.assign({}, state, { email: action.email });

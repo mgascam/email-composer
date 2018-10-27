@@ -40,6 +40,14 @@ class EmailForm extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        this.props.onSendEmail({
+            to: this.state.to.split(',').map(email => email.trim()),
+            cc: this.state.to.split(',').map(email => email.trim()),
+            bcc: this.state.bcc.split(',').map(email => email.trim()),
+            subject: this.state.subject,
+            message: this.state.message,
+            attachments: this.state.attachments
+        });
     }
     // TODO extract function & ut
     validateEmailList(commaSeparatedString){
