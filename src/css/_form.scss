@@ -1,36 +1,45 @@
-$baseWidth: 1920px;
-$white: #fff;
+.email-composer-form {
+    textarea {
+        height: 200px;
+        resize: none;
+    }
 
-// .form-wrapper {
-//     box-shadow: 0px 5px 20px 3px rgba(0,0,0,0.1);
-//     background: $white;
-//     width: 764px / $baseWidth * 100%;
-//     min-width: 764px;
-
+    #input-attachments {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
     
-//     .header {
-//         width: 100%;
-//         height: 86px;
-//         background-color: #094358;
-//         color: $white;
-//         font-family: 'Open Sans', sans-serif;
-//         padding: 40px 20px;
-//         border: 1px solid rgba(0,0,0,0.1);
-//         border-radius: 5px;
-//         z-index: 100;
-//         h1 {
-//             font-size: 16px;
-//             font-weight: normal;
-//         }
-//     }
-// }
-
-.form-wrapper {
-    box-shadow: 0px 5px 20px 3px rgba(0,0,0,0.1);
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 200;
-    .card-header {
-        background-color:rgba(45, 0, 96, 0.9);
-        color: #fefefe;
+    .btn-attachments {
+        display:block;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        border: 1px solid #e1e1e1;
+        position: relative;
+        color: #939598;
+        cursor: pointer;
+        line-height: 40px;
+        padding-left: 9px;
+    }
+    
+    .btn-send {
+        position: absolute;
+        right: 40px;
+        bottom: 45px;
+        width: 110px;
+        height: 40px;
+        border-radius: 100px;
+    
+        &:disabled  {
+            background-color: #e0e0e0;
+            border-color: #e0e0e0;
+            color: #939598;
+        }
     }
 }
+
+

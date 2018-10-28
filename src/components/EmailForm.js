@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import AttachmentList from './AttachmentList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons'
 
 class EmailForm extends Component {
     constructor(props) {
@@ -7,15 +10,26 @@ class EmailForm extends Component {
             to: "",
             cc: "",
             bcc: "",
+            subject: "",
+            message: "",
+            attachments: [],
             toValid: false,
             ccValid: true,
             bccValid: true,
-            subject: "",
-            message: "",
-            formValid: false
+            formValid: false,
+            touched: {
+                to: false,
+                cc: false,
+                bcc: false,
+                subject: false,
+                message: false,
+            }
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+        this.onRemoveAttachment = this.onRemoveAttachment.bind(this);
     }
     handleInputChange(event) {
         const target = event.target;
@@ -25,8 +39,36 @@ class EmailForm extends Component {
             [name]: value
         }, () => { this.validateField(name, value)});
     }
+    handleFileChange(event) {
+        const newAttachment = {
+            id: `attachment-${this.state.attachments.length + 1}`,
+            url: URL.createObjectURL(event.target.files[0])
+        };
+        this.setState({
+            attachments: [...this.state.attachments, newAttachment]
+        });
+    }
+    handleBlur(event) {
+        const target = event.target;
+        const name = target.name;
+        const newState = {
+            touched: {
+                ...this.state.touched,
+                [name]: true 
+            }
+        }
+        this.setState(newState);
+    }
     handleSubmit(event) {
         event.preventDefault();
+        this.props.onSendEmail({
+            to: this.state.to.split(',').map(email => email.trim()),
+            cc: this.state.to.split(',').map(email => email.trim()),
+            bcc: this.state.bcc.split(',').map(email => email.trim()),
+            subject: this.state.subject,
+            message: this.state.message,
+            attachments: this.state.attachments
+        });
     }
     // TODO extract function & ut
     validateEmailList(commaSeparatedString){
@@ -65,57 +107,88 @@ class EmailForm extends Component {
             && this.state.subjectValid 
             && this.state.messageValid;
     }
+    onRemoveAttachment(event){
+        const attachments = this.state.attachments.filter(att => att.id !== event.target.id);
+        this.setState({
+            attachments
+        });
+    }
+    shouldMarkError(field) {
+        const isValid = this.state[`${field}Valid`];
+        const shouldShow = this.state.touched[field];
+        return isValid ? false : shouldShow;
+    }
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="email-composer-form" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <input
-                        className={`form-control ${!this.state.toValid ? 'is-invalid': ''}` }
+                        className={`form-control ${this.shouldMarkError('to') ? 'is-invalid': ''}` }
                         name="to" 
                         type="text" 
                         value={this.state.to} 
-                        onChange={this.handleInputChange} 
+                        onChange={this.handleInputChange}
+                        onBlur={this.handleBlur}
                         placeholder="To" /> 
                 </div>
                 <div className="form-group">
                     <input
-                        className={`form-control ${!this.state.ccValid ? 'is-invalid': ''}` }
+                        className={`form-control ${this.shouldMarkError('cc') ? 'is-invalid': ''}` }
                         name="cc" 
                         type="text" 
                         value={this.state.cc} 
-                        onChange={this.handleInputChange} 
+                        onChange={this.handleInputChange}
+                        onBlur={this.handleBlur}
                         placeholder="CC" />
                 </div>
                 <div className="form-group">
                     <input
-                        className={`form-control ${!this.state.bccValid ? 'is-invalid': ''}` }
+                        className={`form-control ${this.shouldMarkError('bcc')? 'is-invalid': ''}` }
                         name="bcc" 
                         type="text" 
                         value={this.state.bcc} 
-                        onChange={this.handleInputChange} 
+                        onChange={this.handleInputChange}
+                        onBlur={this.handleBlur} 
                         placeholder="BCC"/>
                 </div>
                 <div className="form-group">
                     <input
-                        className={`form-control ${!this.state.subjectValid ? 'is-invalid': ''}` } 
+                        className={`form-control ${this.shouldMarkError('subject') ? 'is-invalid': ''}` } 
                         name="subject" 
                         type="text" 
                         value={this.state.subject} 
-                        onChange={this.handleInputChange} 
+                        onChange={this.handleInputChange}
+                        onBlur={this.handleBlur} 
                         placeholder="Subject"/>
                 </div>
                 <div className="form-group">
                     <textarea
-                        className={`form-control ${!this.state.messageValid ? 'is-invalid': ''}` }
+                        className={`form-control ${this.shouldMarkError('message') ? 'is-invalid': ''}` }
                         name="message" 
                         placeholder="Message" 
                         value={this.state.message} 
                         onChange={this.handleInputChange}>
+                        onBlur={this.handleBlur}
                     </textarea>
                 </div>
+                <div className="form-group">
+                    <input type="file" onChange={this.handleFileChange} id="input-attachments" />
+                    <label htmlFor="input-attachments" className="btn-attachments">
+                        <FontAwesomeIcon 
+                            icon={faPaperclip}
+                            size="lg"
+                            transform={{ rotate:-45 }}
+                        />
+                    </label>
+                </div>
+                <AttachmentList 
+                    attachments={this.state.attachments} 
+                    removeAttachment={this.onRemoveAttachment}  />
                 <button
-                    type="submit" className="btn btn-primary" 
-                    disabled={!this.state.formValid}>Sign up</button>
+                    type="submit" 
+                    className="btn btn-primary btn-send"
+                    onMouseEnter={() => {this.setState({ touched: { to: true, subject: true, message: true }})}}
+                    disabled={!this.state.formValid}>&rarr; Send</button>
             </form>
         )
     }

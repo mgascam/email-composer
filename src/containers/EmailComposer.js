@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { sendEmail } from '../actions';
+import { push } from 'connected-react-router'
 import EmailForm from '../components/EmailForm';
 
 const mapStateToProps = state => {
@@ -10,7 +11,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSendEmail: email => dispatch(sendEmail(email))
+        onSendEmail: (email) => {
+            dispatch(sendEmail(email));
+            dispatch(push('/send-email'));
+        }
     }
 }
 
