@@ -120,7 +120,7 @@ class EmailForm extends Component {
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="email-composer-form" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <input
                         className={`form-control ${this.shouldMarkError('to') ? 'is-invalid': ''}` }

@@ -3,16 +3,18 @@ import React from 'react';
 export default (props) => {
     const attachmentList = props.attachments.map((attachment, i) => {
         return (
-            <li key={`attachment-${i}`}>
-                <img src={attachment.url} 
-                    alt="attachment" 
+            <div className="thumbnail">
+                <img class="img-fluid" 
+                    src={attachment.url}  
                     onClick={props.removeAttachment} 
                     id={attachment.id}
-                    />
-            </li>
+                    alt="" />
+            </div>
         )
     });
     return(
-        <ul>{attachmentList}</ul>
+        <div className="thumbnails">
+            {attachmentList}
+        </div>
     )
 }
