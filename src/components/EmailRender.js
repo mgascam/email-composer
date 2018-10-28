@@ -17,8 +17,8 @@ export default (props) => {
                 <div className="card-header">
                     <div className="d-flex justify-content-center align-items-center">
                         <FontAwesomeIcon icon={faCheckCircle} 
-                                    size="8x"
-                                    color="#61c195" />
+                            size="6x"
+                            color="#61c195" />
                         
                     </div>
                     <h4 className="text-center my-4 text-secondary">Your email has been sent</h4>

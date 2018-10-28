@@ -1,8 +1,10 @@
 import React from 'react';
-
+import Section from './Section';
 const NotFound = () => (
     <div>
-        <h2>Not found</h2>
+        <Section>
+            <h1>Not found</h1>
+        </Section>
     </div>
 );
 
