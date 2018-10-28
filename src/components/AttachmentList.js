@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default (props) => {
     const attachmentList = props.attachments.map((attachment, i) => {
@@ -7,13 +9,22 @@ export default (props) => {
                 style={{'background-image': `url(${attachment.url})`}}
                 onClick={props.removeAttachment}
                 id={attachment.id}>
-                
+                    <div className="circle-container">
+                        <FontAwesomeIcon 
+                            icon={faTrash}
+                            inverse
+                            />
+                    </div>
                 </div>
         )
     });
-    return(
-        <div className="thumbnails">
-            {attachmentList}
+    const attachedFiles = <p>Attached files</p>;
+    return (
+        <div>
+            {props.attachments.length > 0 ? attachedFiles : ''}
+            <div className="thumbnails">
+                {attachmentList}
+            </div>
         </div>
     )
 }

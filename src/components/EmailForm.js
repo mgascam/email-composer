@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AttachmentList from './AttachmentList';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperclip } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
 class EmailForm extends Component {
     constructor(props) {
@@ -172,6 +172,12 @@ class EmailForm extends Component {
                     </textarea>
                 </div>
                 <div className="form-group">
+                    <AttachmentList 
+                        attachments={this.state.attachments} 
+                        removeAttachment={this.onRemoveAttachment}  />
+                </div>
+                
+                <div className="form-group">
                     <input type="file" onChange={this.handleFileChange} id="input-attachments" />
                     <label htmlFor="input-attachments" className="btn-attachments">
                         <FontAwesomeIcon 
@@ -181,9 +187,7 @@ class EmailForm extends Component {
                         />
                     </label>
                 </div>
-                <AttachmentList 
-                    attachments={this.state.attachments} 
-                    removeAttachment={this.onRemoveAttachment}  />
+                
                 <button
                     type="submit" 
                     className="btn btn-primary btn-send"

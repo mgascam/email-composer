@@ -14,7 +14,9 @@
     }
     
     .btn-attachments {
-        display:block;
+        display:flex;
+        align-items: center;
+        justify-content: center;
         height: 40px;
         width: 40px;
         border-radius: 50%;
@@ -22,8 +24,6 @@
         position: relative;
         color: #939598;
         cursor: pointer;
-        line-height: 40px;
-        padding-left: 9px;
     }
     
     .btn-send {
