@@ -2,9 +2,9 @@ import { SEND_EMAIL } from '../actions';
 
 export const initialState = {
     email: {
-        to: '',
-        cc: '',
-        bcc: '',
+        to: [],
+        cc: [],
+        bcc: [],
         subject: '',
         message: '',
         attachments: []

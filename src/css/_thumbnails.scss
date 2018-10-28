@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    cursor: pointer;
+    
     .thumbnail {
         width: 100px;
         height: 100px;
@@ -29,8 +29,9 @@
             pointer-events: none;
         }
 
-        &:hover {
+        &-edit:hover {
             box-shadow:inset 0 0 0 2000px rgba(0,0,0,0.3);
+            cursor: pointer;
             .circle-container {
                 display: flex;
             }

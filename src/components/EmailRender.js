@@ -29,7 +29,7 @@ export default (props) => {
                     {renderRecipients('cc')}
                     {renderRecipients('bcc')}
                     <p className="text-justify mt-3">{email.message}</p>
-                    <AttachmentList attachments={email.attachments} />
+                    <AttachmentList attachments={email.attachments} mode="display" />
                 </div>
             </div>
         )
