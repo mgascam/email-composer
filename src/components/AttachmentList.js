@@ -6,9 +6,11 @@ export default (props) => {
     const attachmentList = props.attachments.map((attachment, i) => {
         return (
             <div className="thumbnail"
-                style={{'background-image': `url(${attachment.url})`}}
+                style={{backgroundImage: `url(${attachment.url})`}}
                 onClick={props.removeAttachment}
-                id={attachment.id}>
+                id={attachment.id}
+                key={`key-${i}`}
+                >
                     <div className="circle-container">
                         <FontAwesomeIcon 
                             icon={faTrash}

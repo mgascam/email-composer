@@ -1,20 +1,18 @@
 import React from 'react';
-import PageTemplate from './PageTemplate';
+import Section from './Section';
 import EmailComposer from '../containers/EmailComposer';
 
-export default (props) => {
+export default () => {
     return (
-        <PageTemplate>
-            <section className="email-composer-wrapper">
-                <div className="card">
-                    <div className="card-header">
-                        <h1>Send E-mail</h1>
-                    </div>
-                    <div className="card-body">
-                        <EmailComposer />
-                    </div>
+        <Section classNames="email-composer-wrapper">
+            <div className="card">
+                <div className="card-header">
+                    <h1>Send E-mail</h1>
                 </div>
-            </section>
-        </PageTemplate>
+                <div className="card-body">
+                    <EmailComposer />
+                </div>
+            </div>
+        </Section>
     );
 };
