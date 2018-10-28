@@ -5,7 +5,7 @@ import EmailComposer from '../containers/EmailComposer';
 export default (props) => {
     return (
         <PageTemplate>
-            <section className="form-wrapper">
+            <section className="email-composer-wrapper">
                 <div className="card">
                     <div className="card-header">
                         <h1>Send E-mail</h1>
